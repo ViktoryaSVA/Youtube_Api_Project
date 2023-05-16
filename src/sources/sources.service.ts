@@ -7,7 +7,7 @@ import { SourceEntity } from './entities/source.entity';
 export class SourcesService {
     constructor(
         @InjectRepository(SourceEntity)
-        private readonly sourceRepository: Repository<SourceEntity>,
+        private readonly sourceRepository: Repository<SourceEntity>
     ) {}
 
     async create(source: SourceEntity): Promise<SourceEntity> {

@@ -1,6 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm';
-import {PostEntity} from "../../posts/entities/post.entity";
-import {SourceEntity} from "../../sources/entities/source.entity";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import { PostEntity } from "../../posts/entities/post.entity";
+import { SourceEntity } from "../../sources/entities/source.entity";
 
 @Entity()
 export class AccountEntity {

@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PostEntity } from './entities/post.entity';
-import {HttpService} from "@nestjs/axios";
-import {AccountEntity} from "../account/entities/account.entity";
+import { HttpService } from "@nestjs/axios";
+import { AccountEntity } from "../account/entities/account.entity";
 
 @Injectable()
 export class PostsService {
@@ -12,7 +12,7 @@ export class PostsService {
         private postsRepository: Repository<PostEntity>,
         @InjectRepository(AccountEntity)
         private readonly accountRepository: Repository<AccountEntity>,
-        private readonly httpService: HttpService,
+        private readonly httpService: HttpService
     ) {}
     async loadPosts(): Promise<PostEntity[]> {
         const accounts = await this.accountRepository.find();
@@ -24,8 +24,8 @@ export class PostsService {
         for (const account of accounts) {
             const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${account.channelId}&type=video&publishedAfter=${startDate.toISOString()}&publishedBefore=${endDate.toISOString()}&maxResults=50&key=${process.env.YOUR_PRIVATE_KEY}`;
 
-            let response = await this.httpService.get(url).toPromise();
-            let data = response.data;
+            const response = await this.httpService.get(url).toPromise();
+            const { data } = response;
 
             for (const item of data.items) {
                 const post = new PostEntity();
@@ -41,4 +41,4 @@ export class PostsService {
 
         return posts;
     }
-};
+}
